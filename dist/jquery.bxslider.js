@@ -1,6 +1,6 @@
 /**
  * bxSlider v4.2.5
- * Copyright 2013-2015 Steven Wanderski
+ * Copyright 2013-2016 Steven Wanderski
  * Written while drinking Belgian ales and listening to jazz
 
  * Licensed under MIT (http://opensource.org/licenses/MIT)
@@ -1334,6 +1334,7 @@
     el.goToSlide = function(slideIndex, direction) {
       // onSlideBefore, onSlideNext, onSlidePrev callbacks
       // Allow transition canceling based on returned value
+	  if (slider.working) { return; }
       var performTransition = true,
       moveBy = 0,
       position = {left: 0, top: 0},
@@ -1345,7 +1346,8 @@
       slider.active.index = setSlideIndex(slideIndex);
 
       // if plugin is currently in motion, ignore request
-      if (slider.working || slider.active.index === slider.oldIndex) { return; }
+      //if (slider.working || slider.active.index === slider.oldIndex) { return; }
+	  if (slider.active.index === slider.oldIndex) { return; }
       // declare that plugin is in motion
       slider.working = true;
 

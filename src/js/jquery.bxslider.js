@@ -1326,6 +1326,7 @@
     el.goToSlide = function(slideIndex, direction) {
       // onSlideBefore, onSlideNext, onSlidePrev callbacks
       // Allow transition canceling based on returned value
+	  if (slider.working) { return; }
       var performTransition = true,
       moveBy = 0,
       position = {left: 0, top: 0},
@@ -1337,7 +1338,8 @@
       slider.active.index = setSlideIndex(slideIndex);
 
       // if plugin is currently in motion, ignore request
-      if (slider.working || slider.active.index === slider.oldIndex) { return; }
+      //if (slider.working || slider.active.index === slider.oldIndex) { return; }
+	  if (slider.active.index === slider.oldIndex) { return; }
       // declare that plugin is in motion
       slider.working = true;
 
